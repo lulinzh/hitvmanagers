@@ -1,0 +1,32 @@
+<if condition="is_login()">
+	<php>load_ucenter(1);</php>
+		<li class="passport"><span style="display:block;padding:28px 0px 0px 36px;">&nbsp;</span></li>
+		<li class="passport">
+			<span style="display:block;padding:14px 0px 0px 6px;cursor:pointer;" onclick="javascript:location.href='{:U('User/avatar')}';return false;" title="修改头像" id="btnAvatar">
+				<img src="{$Think.const.UC_API}/avatar.php?uid={:is_login()}&size=small">
+			</span>
+		</li>
+		<li class="dropdown passport"><a href="__ROOT__/User/" title="用户中心" class="b">用户中心<span class="caret"></span><small>管理中心</small></a>
+		<ul class="dropdown-menu dropdown-menu-left">
+			<li><a href="{:U('User/avatar')}">修改头像</a></li>
+			<li><a href="{:U('User/profile')}">修改资料</a></li>
+			<li><a href="{:U('User/actionlog')}">操作日志</a></li>
+			<li><a href="javascript:UAC.logout('/');">退出登录</a></li>
+		</ul>
+		</li>
+		<li class="passport"><a href="__ROOT__/User/" title="管理中心" id="btnLogin"><span class="label label-warning" style="font-size:16px;">&nbsp;管理中心&nbsp;</span><small>互动管理控制台</small></a></li>
+<else/>
+		<li class="passport"><span style="display:block;padding:28px 0px 0px 36px;">&nbsp;</span></li>
+		<if condition="C('USER_ALLOW_QQLOGIN') == 1">
+		<li class="passport"><span style="display:block;padding:28px 0px 0px 6px;cursor:pointer;" onclick="javascript:parent.UAC.openQQ();return false;" title="QQ登录/注册" id="btnLoginQQ"><img src="__TPLROOT__/skin/images/qq_login.png" onmouseover="$(this).attr('src','__TPLROOT__/skin/images/qq_login_blue.png')" onmouseout="$(this).attr('src','__TPLROOT__/skin/images/qq_login.png')"></span></li>
+		</if>
+		<if condition="C('USER_ALLOW_WXLOGIN') == 1">
+		<li class="passport"><span style="display:block;padding:28px 0px 0px 6px;cursor:pointer;"  onclick="javascript:parent.UAC.openWxQrcode();return false;" title="微信帐号登录/注册" id="btnLoginWx"><img src="__TPLROOT__/skin/images/wechat_login.png"></span></li>
+		</if>
+		<if condition="C('USER_ALLOW_LOGIN') == 1">
+		<li class="passport"><a href="#" onclick="javascript:UAC.openUAC(0); return false;" title="登录" id="btnLogin">登录<small>帐号</small></a></li>
+		</if>
+		<if condition="C('USER_ALLOW_REGISTER') == 1">
+		<li class="passport"><a href="#" onclick="javascript:UAC.openUAC(1); return false;" title="注册" id="btnRegister">注册<small>新号</small></a></li>
+		</if>
+</if>

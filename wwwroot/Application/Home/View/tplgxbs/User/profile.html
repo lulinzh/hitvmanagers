@@ -1,0 +1,115 @@
+<extend name="Base/user" />
+
+<block name="script">
+	<script type="text/javascript" src="__PUBLIC__/static/address/jsAddress.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/static/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/static/formvalidator3.3/formvalidator.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/static/formvalidator3.3/formvalidatorregex.js"></script>
+</block>
+
+<block name="main">
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation"><a href="{:U('User/avatar')}"><i class="glyphicon glyphicon-user"></i> 修改头像</a></li>
+		<li role="presentation" class="active"><a href="javascript:;"><i class="glyphicon glyphicon-edit"></i> 修改资料</a></li>
+		<li role="presentation"><a href="{:U('User/actionlog')}"><i class="glyphicon glyphicon-eye-open"></i> 操作日志</a></li>
+	</ul>
+      
+    <br/>
+
+    <div class="row">
+   	<form id="form" class="form-horizontal" action="" method="post">
+	  <input type="hidden" id="form_uid" name="uid" value="{$member.uid}">
+	  <div class="form-group form-group-sm">
+	    <label class="col-sm-2 control-label"><span class="text-danger">*</span> 头像：</label>
+	    <div class="col-sm-6">
+			<if condition="0==uc_check_avatar(UID)">
+			<div class="pull-left alert alert-warning" role="alert">
+				<strong>您还没有上传头像</strong> &nbsp;&nbsp;&nbsp;&nbsp;<a href="{:U('User/avatar')}">点这里修改头像</a>， 请您选择一个新照片进行上传编辑，也可以使用您电脑的摄像头拍照上传哦。
+			</div>
+			<else/>
+          		<a href="{:U('User/avatar')}" class="pull-left"><img class="img-circle" src="{$Think.const.UC_API}/avatar.php?uid={:is_login()}&size=middle"></a>
+			</if>
+	    </div>
+	  </div>
+
+	  <div class="form-group form-group-sm">
+	    <label class="col-sm-2 control-label" for="form_nickname"><span class="text-danger">*</span> 昵称：</label>
+	    <div class="col-sm-6">
+	      <input class="form-control" type="text" id="form_nickname" name="nickname" value="{$member.nickname}" placeholder="请输入昵称">
+	    </div>
+	    <div class="col-sm-4"><span id="form_nicknameTip" class=""></span></div>
+	  </div>
+	  <div class="form-group form-group-sm">
+	    <label class="col-sm-2 control-label" for="form_fullname"><span class="text-danger">*</span> 姓名：</label>
+	    <div class="col-sm-6">
+	      <input class="form-control" type="text" id="form_fullname" name="fullname" value="{$member.fullname}" placeholder="请输入真实姓名">
+	    </div>
+	    <div class="col-sm-4"><span id="form_fullnameTip" class=""></span></div>
+	  </div>
+	  <div class="form-group form-group-sm">
+	    <label class="col-sm-2 control-label" for="form_phone"><span class="text-danger">*</span> 手机号码：</label>
+	    <div class="col-sm-6">
+	      <input class="form-control" type="text" id="form_phone" name="phone" value="{$member.phone}" placeholder="联系手机号码">
+	    </div>
+	    <div class="col-sm-4"><span id="form_phoneTip" class=""></span></div>
+	  </div>
+	  <div class="form-group form-group-sm">
+	    <label class="col-sm-2 control-label" for="form_birthday">性别：</label>
+	    <div class="col-sm-6">
+	    	<label class="checkbox-inline"> <input type="radio" name="sex" id="form_sex_0" value="0" <if condition="0==$member['sex']">checked</if>> 保密</label>
+	    	<label class="checkbox-inline"> <input type="radio" name="sex" id="form_sex_0" value="1" <if condition="1==$member['sex']">checked</if>> 男</label>
+	    	<label class="checkbox-inline"> <input type="radio" name="sex" id="form_sex_0" value="2" <if condition="2==$member['sex']">checked</if>> 女</label>
+		</div>
+	    <div class="col-sm-4"><span id="form_birthdayTip" class=""></span></div>
+	  </div>
+	  <div class="form-group form-group-sm">
+	    <label class="col-sm-2 control-label" for="form_birthday">生日：</label>
+	    <div class="col-sm-6">
+	      <input class="form-control" type="text" id="form_birthday" name="birthday" value="{$member.birthday}" placeholder="请输入生日，以方便系统在您生日时候送上祝福！" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+	    </div>
+	    <div class="col-sm-4"><span id="form_birthdayTip" class=""></span></div>
+	  </div>
+	  <div class="form-group form-group-sm">
+	    <label class="col-sm-2 control-label" for="form_country">国家/地区：</label>
+	    <div class="col-sm-6">
+	      <input class="form-control" type="text" id="form_country" name="country" value="{$member.country|default='中国'}" disabled="true">
+	    </div>
+	  </div>
+	  <div class="form-group form-group-sm">
+	    <label class="col-sm-2 control-label" for="form_province"><span class="text-danger">*</span> 省份/城市/县区：</label>
+	    <div class="col-sm-6">
+	      <select class="form-control pull-left" style="width:33%" id="form_province" name="province"></select>
+	      <select class="form-control pull-left" style="width:33%" id="form_city" name="city"></select>
+	      <select class="form-control pull-left" style="width:33%" id="form_area" name="area"></select>
+	    </div>
+	    <div class="col-sm-4"><span id="form_cityTip" class=""></span></div>
+	  </div>
+	  <div class="form-group form-group-sm">
+	    <label class="col-sm-2 control-label" for="form_qq">联系QQ号码：</label>
+	    <div class="col-sm-6">
+	      <input class="form-control" type="text" id="form_qq" name="qq" value="{$member.qq}" placeholder="联系QQ号码">
+	    </div>
+	    <div class="col-sm-4"><span id="form_qqTip" class=""></span></div>
+	  </div>
+	  <div class="form-group form-group-sm">
+	    <label class="col-sm-2 control-label">&nbsp;</label>
+	    <div class="col-sm-6">
+	      <button type="submit" class="btn btn-success">提交</button> &nbsp; 
+	      <button type="reset" class="btn btn-success">重置</button>
+	    </div>
+	  </div>
+	</form>
+	</div>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		addressInit('form_province', 'form_city', 'form_area', '{$member.province|default='广西'}', '{$member.city|default='南宁'}', '{$member.area|default='市辖区'}');
+		
+		$.formValidator.initConfig({autotip:true,formid:"form",onerror:function(msg){},onsuccess:function(){ return true;}});
+		$("#form_nickname").formValidator({onshow:"请输入昵称",onfocus:"输入您喜好的网名",oncorrect:"&nbsp;",onerror: "请输入昵称",defaultValue:""}).inputValidator({min:1,max:16,onerrormin: "昵称必须输入",onerrormax: "不超过16个字符，汉字算两个字符"});
+		$("#form_fullname").formValidator({onshow:"请输入姓名",onfocus:"输入您的姓名",oncorrect:"&nbsp;",onerror: "请输入姓名",defaultValue:""}).inputValidator({min:1,max:16,onerrormin: "姓名必须输入",onerrormax: "不超过16个字符，汉字算两个字符"});
+		$("#form_phone").formValidator({empty:false,onempty:"请输入手机号码",onshow:"请输入手机号码",onfocus:"请输入手机号码",oncorrect:"&nbsp;"}).regexValidator({regexp:regexEnum.mobile, onerror:"手机号码格式不正确"});
+		$("#form_qq").formValidator({empty:true,onempty:"&nbsp;",onshow:"请输入QQ号码",onfocus:"请输入QQ号码",oncorrect:"&nbsp;"}).regexValidator({regexp:regexEnum.intege1, onerror:"QQ号码格式不正确"});
+	});
+	</script>
+</block>

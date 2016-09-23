@@ -1,0 +1,51 @@
+{// 封面栏目默认模版 } 
+<extend name="Base/common"/>
+
+<block name="php"></block>
+
+<block name="header">
+<!-- banner start -->
+<div class="banner text-center">
+<think:link name="link" group="">
+<if condition=" !empty($link['img']) && $link['group']==$position[0]['name'].'_banner'">
+	<div class="box hba" style="background-image:url(__ROOT__{$link.img})"> </div>
+</if>
+</think:link>
+</div>
+<!-- banner end --> 
+</block>
+
+<block name="body">
+
+<!-- crumbs start -->
+<div class="crumbs">
+  <div class="container">
+    <div class="btn-group pull-right hidden-xs">
+      <button type="button" class="btn btn-menu btn-default dropdown-toggle" data-toggle="dropdown">更多菜单 Menu <span class="caret"></span></button>
+      <ul class="dropdown-menu" role="menu">
+	      <php>	$menu = get_category_son($category['id']); if( empty($menu) )$menu = get_category_son(0); </php>
+	      <volist name="menu" id="vo">
+	      <li><a href="{:U('Category/index?category='.$vo['name'])}">{$vo.title}</a></li>
+	      </volist>
+      </ul>
+    </div>
+    <ol class="breadcrumb">
+    	<li>
+    		<a href="__ROOT__/">首页</a>
+    		<volist name="position" id="vo">
+    		 &gt; <a href="{:U('Category/index?category='.$vo['name'])}">{$vo.title}</a>
+    		</volist>
+    	</li>
+    </ol>
+  </div>
+</div>
+<!-- crumbs end --> 
+<!-- content start -->
+<div class="neirong">
+	<div class="container">
+		{$category.content|default=''} 
+ 	</div>
+</div>
+<!-- content end -->
+
+</block>

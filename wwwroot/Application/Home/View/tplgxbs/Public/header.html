@@ -1,0 +1,63 @@
+<!-- header start -->
+<header data-headroom id="header" class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="{:C('WEB_SITE_CONTAINER')}"> 
+    <!-- mobile nav start -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+      <!-- logo start -->
+      <h1 class="logo"><a class="navbar-brand" href="__ROOT__/"><img src="__TPLROOT__/skin/images/logo.png" alt="{:C('WEB_SITE_TITLE')}" title="{:C('WEB_SITE_TITLE')}" class="ylw-img-responsive logo-hidden" /><img src="__TPLROOT__/skin/images/blogo.png" alt="{:C('WEB_SITE_TITLE')}" title="{:C('WEB_SITE_TITLE')}" class="ylw-img-responsive logo-visible" /></a><if condition="C('USER_ALLOW_LOGIN') == 0"><small class="pull-left"><a href="__ROOT__/" class="visible-lg">{:C('WEB_SITE_TITLE')}</a></small></if></h1>
+      <ul class="list-unstyled head-lx">
+        <li>三网融合，创造价值<br />
+          <small>Tri-Networks convergence Creation Value  </small></li>
+        <li>三屏互动创造者与领航者<br />
+          <small>Creator and leader of tri-display interaction.</small></li>
+        <li class="tel">全国服务： 0771-3388661 / 15977722298</li>
+        <li class="oc">在线咨询：<a href="http://wpa.qq.com/msgrd?v=3&uin=3358304&site=qq&menu=yes
+" target="_blank"><img src="__TPLROOT__/skin/images/head-sq.png" alt="在线咨询"></a> <a href="http://wpa.qq.com/msgrd?v=3&uin=3358304&site=qq&menu=yes" target="_blank"><img src="__TPLROOT__/skin/images/head-qq.png" alt="QQ咨询"></a></li>
+      </ul>
+    </div>
+    <!-- mobile nav end --> 
+
+    <!-- nav start -->
+    <script src="__TPLROOT__/skin/js/logon.js?t={$Think.const.BRIGHTSTARTHINK_VERSION}"></script>
+    <nav class="collapse navbar-right navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav" id="nav">
+        <think:nav name="nav" tree="true">
+        	<eq name="nav.pid" value="0">
+        <li class="dropdown <if condition="($nav['url']=='/' && !isset($position)) || strstr($nav['url'],$position[0]['name'])">active</if>">
+        	<a class="dropdown-toggle" href="{$nav.url|get_nav_url}" target="<eq name='nav.target' value='1'>_blank<else/>_self</eq>">{$nav.title}<if condition="is_array($nav['_'])"><span class="caret"></span></if><small>{$nav.entitle}</small></a>
+        	<if condition="is_array($nav['_'])">
+        	<ul class="dropdown-menu dropdown-menu-left">
+        		<volist name="nav['_']" id="vo">
+        		<li><a href="{$vo.url|get_nav_url}">{$vo.title}</a></li>
+        		</volist>
+        	</ul>
+        	</if>
+        </li>
+        	</eq>
+        </think:nav>
+        
+        <include file="Passport/header"/>
+        <if condition="C('USER_ALLOW_LOGIN') == 1 || C('USER_ALLOW_REGISTER') == 1">
+		<script language="javascript" type="text/javascript">
+		$(document).ready(function(){	
+			setTimeout(function(){ 
+				;//$.get("__ROOT__/index.php/Home/Passport/header/t/"+Math.random(),function(data){ $('#nav .passport').remove(); $('#nav').append(data);});
+			}, 50);
+		});
+		</if>
+
+		</script>
+      </ul>
+    </nav>
+    <!-- nav end --> 
+    
+    
+
+
+  </div>
+</header>
+<!-- header end --> 
+<!-- block header start -->
+<block name="header"></block>
+<!-- block header end -->

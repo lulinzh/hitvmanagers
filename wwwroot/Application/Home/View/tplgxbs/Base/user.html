@@ -1,0 +1,163 @@
+<block name="php"></block>
+<!DOCTYPE HTML>
+<html>
+<head>
+<block name="head">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Cache" content="no-cache">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><notempty name="category.title">用户中心 - </notempty>{:C('WEB_SITE_TITLE')}</title>
+<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}" />
+<meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}" />
+<meta name="author" content="order by gxbrightstar.com" />
+
+<!-- Bootstrap core JavaScript ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script src="__PUBLIC__/assets/js/vendor/holder.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="__PUBLIC__/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+<!-- Bootstrap core CSS -->
+<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="__TPLROOT__/skin/css/usercommon.css" rel="stylesheet">
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="__PUBLIC__/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script src="__PUBLIC__/assets/js/ie-emulation-modes-warning.js"></script>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</block>
+
+<script type="text/javascript"> try {	document.domain = '{$_SERVER['HTTP_HOST']}'; 	}catch(e){ } </script>
+<script language="javascript" src="__TPLROOT__/skin/js/usercommon.js?t={$Think.const.BRIGHTSTARTHINK_VERSION}"></script>
+<block name="script"></block>
+<block name="style"></block>
+</head>
+
+<body>
+	<!-- 头部 -->
+	<block name="header">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <h1 class="logo"><a class="" href="__ROOT__/"><img src="__TPLROOT__/skin/images/logo.png" alt="{:C('WEB_SITE_TITLE')}" title="{:C('WEB_SITE_TITLE')}" /></a></h1>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control input-sm" placeholder="搜索...">
+            <button type="submit" class="btn btn-sm btn-default">搜</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+            	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i> 帐号设置<span class="caret"></span></a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li><a href="{:U('User/avatar')}"><i class="glyphicon glyphicon-user"></i> 修改头像</a></li>
+                  <li><a href="{:U('User/profile')}"><i class="glyphicon glyphicon-edit"></i> 修改资料</a></li>
+                  <li><a href="{:U('User/actionlog')}"><i class="glyphicon glyphicon-eye-open"></i> 操作日志</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="{:U('Passport/logout',array('type'=>'redirect'))}"><i class="glyphicon glyphicon-log-out"></i> 退出登录</a></li>
+                </ul>
+            </li>
+            <li class="active"><a href="__ROOT__/User/"><i class="glyphicon glyphicon-user"></i> 管理首页</a></li>
+            <li class="dropdown">
+            	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-th-list"></i> 常用菜单<span class="caret"></span></a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li><a href="{:U('User/avatar')}"><i class="glyphicon glyphicon-user"></i> 修改头像</a></li>
+                  <li><a href="{:U('User/profile')}"><i class="glyphicon glyphicon-edit"></i> 修改资料</a></li>
+                  <li><a href="{:U('User/actionlog')}"><i class="glyphicon glyphicon-eye-open"></i> 操作日志</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="{:U('Passport/logout',array('type'=>'redirect'))}"><i class="glyphicon glyphicon-log-out"></i> 退出登录</a></li>
+                </ul>
+            </li>
+            <li><a href="__ROOT__/"><i class="glyphicon glyphicon-home"></i> 首页</a></li>
+            <li><a href="{:U('Help/index')}"><i class="glyphicon glyphicon-camera"></i> 帮助</a></li>
+          </ul>
+          <div class="navbar-right">
+          	<span style="display:block;padding:2px 0px 0px 0px;cursor:pointer;" onclick="javascript:location.href='{:U('User/avatar')}';return false;" title="修改头像" id="btnAvatar">
+				<img src="{$Think.const.UC_API}/avatar.php?uid={:is_login()}&size=small">
+			</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+    </block>
+
+    <div class="container-fluid">
+      <div class="row">
+			<div class="col-sm-3 col-md-2 sidebar" id="sidebar">
+			<block name="sidebar">
+				<ul id="sidebar-nav" class="nav nav-tabs nav-stacked" style="">
+					<li class=""><a href="__ROOT__/User/"> <i class="glyphicon glyphicon-th-large"></i> 管理首页</a></li>
+					<li>
+						<a href="#huodongSetting" class="nav-header collapsed" data-toggle="collapse"> <i class="glyphicon glyphicon-asterisk"></i> 活动管理 <span class="pull-right glyphicon glyphicon-chevron-up"></span></a>
+						<ul id="huodongSetting" class="nav nav-list collapse secondmenu in">
+							<li><a href="#"><i class="glyphicon glyphicon-user"></i> 互动活动</a></li>
+							<li><a href="#"><i class="glyphicon glyphicon-eye-open"></i> 邀请函</a></li>
+							<li><a href="#"><i class="glyphicon glyphicon-th-list"></i> 摇一摇</a></li>
+							<li><a href="#"><i class="glyphicon glyphicon-asterisk"></i> 随机抽奖</a></li>
+							<li><a href="#"><i class="glyphicon glyphicon-edit"></i> 节目评分</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#systemSetting" class="nav-header collapsed" data-toggle="collapse"> <i class="glyphicon glyphicon-cog"></i> 系统管理 <span class="pull-right glyphicon glyphicon-chevron-up"></span></a>
+						<ul id="systemSetting" class="nav nav-list collapse secondmenu in">
+		                  <li><a href="{:U('User/avatar')}"><i class="glyphicon glyphicon-user"></i> 修改头像</a></li>
+		                  <li><a href="{:U('User/profile')}"><i class="glyphicon glyphicon-edit"></i> 修改资料</a></li>
+		                  <li><a href="{:U('User/actionlog')}"><i class="glyphicon glyphicon-eye-open"></i> 操作日志</a></li>
+		                  <li><a href="{:U('Passport/logout',array('type'=>'redirect'))}"><i class="glyphicon glyphicon-log-out"></i> 退出登录</a></li>
+						</ul>
+					</li>
+					<li><a href="#"> <i class="glyphicon glyphicon-globe"></i> 入口配置 <span class="label label-warning pull-right">5</span></a></li>
+					<li><a href="#"> <i class="glyphicon glyphicon-calendar"></i> 图表统计 <span class="label label-warning pull-right">1</span></a></li>
+					<li><a href="{:U('Category/index',array('category'=>'guanyuwomen'))}" target="_blank"> <i class="glyphicon glyphicon-fire"></i> 关于系统</a></li>
+				</ul>
+<script language="javascript" type="text/javascript">
+	$(document).ready(function(){
+		// 菜单点击
+		$('#sidebar-nav .nav-header').click(function(){
+			if($(this).find('.glyphicon-chevron-down').length >0)
+				$(this).find('.glyphicon-chevron-down').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+			else
+				$(this).find('.glyphicon-chevron-up').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+		});
+	});
+</script>
+</literal>
+			</block>
+			</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<block name="top-alert">
+				<div id="top-alert" class="fixed alert alert-error" style="display: none;">
+					<button class="close fixed" style="margin-top: 4px;">×</button>
+					<div class="alert-content">这是内容</div>
+				</div>
+				</block>
+				<block name="main">
+				</block>
+			</div>
+      </div>
+    </div>
+
+<literal>
+
+	  
+</body>
+</html>

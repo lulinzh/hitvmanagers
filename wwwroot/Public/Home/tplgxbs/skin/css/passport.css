@@ -1,0 +1,184 @@
+﻿body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,input,textarea,p,table,th,td{margin:0;padding:0;}
+body{font-size:12px;color:#333;font-family:"宋体",Arial,Helvetica,sans-serif;background: #fff;}
+input,select,button,textarea{vertical-align:middle;font-size:12px;outline:none;}
+ol,ul{list-style:none;}img{border:0;}
+
+/* 公用*/
+.joymodlogin{margin:0 auto;color:#333;text-align:left;background:url(../images/usercenter/loginbanner.png) repeat-x #fff; width:100%;padding-top:116px; background-size: contain;}
+.joymodlogin a{color:#333;text-decoration:none;}
+.joymodlogin a:hover{color:#333;text-decoration:underline;}
+.joymodlogin h3{font-size:12px;line-height:30px;padding:0 0 0 8px;height:30px;overflow:hidden;}
+.joymodlogin .msg{text-align: center; display: block; height: 200px; line-height: 200px;}
+
+.imgcheckcode {width: 100px;height: 31px;vertical-align: middle;cursor: pointer;}
+
+.login-area {
+	float: left;
+	position: relative;
+	width: 400px;
+	margin-left: 16px;
+	border-right: 1px dashed #e3e3e3
+}
+.login-item{
+	margin-top: 12px;
+}
+.login-area .login-input, .login-area .login-pwd {
+	width: 200px;
+	height: 20px;
+	line-height: 20px;
+	padding: 6px 10px 6px;
+	color: #333;
+	border: 1px solid #d5d5d5;
+	background: #fcf9f9;
+	font-size: 14px;
+	/* font-weight:bold; */
+}
+
+.login-area .login-default-text {
+	position: absolute;
+	top: 25px;
+	left: 11px;
+	color: #BBB;
+	font-size: 14px;
+	cursor: text
+}
+.login-area .login-check {
+	margin-top: 10px;
+	text-align: left
+}
+.login-area .login-check input {
+	position: relative;
+	/*top:3px;*/
+	
+	margin-right: 5px
+}
+.login-area .login-btn {
+	outline: none;
+	cursor: pointer;
+	display: block;
+	width: 220px;
+	height: 38px;
+	margin-top: 10px;
+	color: #fff;
+	font: 18px/38px Microsoft YaHei;
+	text-align: center;
+	text-decoration: none !important;
+	background: url(../images/usercenter/rep.png) 0 -80px repeat-x;
+	border: none;
+}
+.login-area .login-btn:hover,
+.login-area .login-btn:active {
+	background-position: 0 -40px
+}
+.login-area .login-error-tip {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 308px;
+	height: 25px;
+	line-height: 25px;
+	color: #ef6433;
+	background: #fff
+}
+.login-area .login-error-tip .icon-error {
+	margin-bottom: -2px;
+	margin-right: 6px
+}
+
+.login-area .btn {
+	cursor: pointer;
+	height: 32px;
+	margin: 0px;
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+	text-decoration: none !important;
+	background: url(../images/usercenter/rep.png) 0 -80px repeat-x;
+	border: none;
+}
+.login-area .btn:hover,.login-area .btn:active {
+	background-position: 0 -40px
+}
+
+
+.no-account {
+	float: right;
+	width: 210px;
+	padding: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+.no-account p {
+	margin: 5px 0 12px;
+}
+.no-account .btn {
+	position: relative;
+	display: block;
+	width: 190px;
+	height: 39px;
+	line-height: 39px;
+	text-decoration: none !important;
+	background: url(../images/usercenter/rep.png) 0 0 repeat-x  #ebebeb;
+	border-radius: 2px;
+	border:1px solid;
+}
+.no-account .btn:hover,
+.no-account .btn:active {
+	color: #fff
+}
+.no-account .regist-ntes {
+	border-color: #e5e5e5 #e4e4e4 #e6e6e6;
+	background-position: 0 -200px
+}
+.no-account .regist-ntes:hover, .no-account .regist-ntes:active, .no-account .on {
+	border-color: #c74747 #c54141 #ca5151;
+	background-position: 0 0
+}
+
+.regist-ntes .icon-ntes{
+	float: left;
+  display: block;
+  width: 25px;
+  height: 22px;
+  margin: 8px 6px 0px 40px;
+}
+.regist-ntes .weixin{	background: url(../images/usercenter/rep.png) 0 -450px repeat-x;}
+.regist-ntes .qq{	background: url(../images/usercenter/rep.png) 0 -475px repeat-x;}
+.regist-ntes .reg{	background: url(../images/usercenter/rep.png) 0 -500px repeat-x;}
+.regist-ntes .login{	background: url(../images/usercenter/rep.png) 0 -525px repeat-x;}
+.regist-ntes .phone{	background: url(../images/usercenter/rep.png) -25px -450px repeat-x;}
+.regist-ntes .email{	background: url(../images/usercenter/rep.png) -25px -475px repeat-x;}
+
+
+
+.ntes-regist {
+	display: block;
+	width: 302px;
+	height: 84px;
+	color: #fff;
+	font: bold 16px/84px Microsoft YaHei;
+	text-align: center;
+	margin: 16px 0 8px;
+	text-decoration: none !important;
+	background: url(../images/usercenter/rep.png) 0 -280px repeat-x
+}
+.ntes-regist:hover,
+.ntes-regist:active {
+	background-position: 0 -365px
+}
+			
+			
+.forgot{float:right; color:#666;margin-right:20px;position: relative;top:36px;}
+
+
+/* get this css from file: table_form.css */
+.onShow,.onFocus,.onError,.onCorrect,.onLoad,.onTime{display:inline-block;display:-moz-inline-stack;zoom:1;*display:inline; vertical-align:middle;background:url(/Public/statics/images/msg_bg.png) no-repeat;	color:#444;line-height:18px;padding:2px 10px 2px 23px; margin-left:2px;_margin-left:5px}
+.onShow{background-position:3px -147px;border-color:#40B3FF;color:#959595}
+.onFocus{background-position:3px -147px;border-color:#40B3FF;}
+.onError{background-position:3px -47px;border-color:#40B3FF; color:red}
+.onCorrect{background-position:3px -247px;border-color:#40B3FF;}
+.onLamp{background-position:3px -200px}
+.onTime{background-position:3px -1356px}
+
+
+

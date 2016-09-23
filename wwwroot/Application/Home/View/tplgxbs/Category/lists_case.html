@@ -1,0 +1,95 @@
+{// 成功案例栏目模版 } 
+<extend name="Base/common"/>
+
+<block name="php"></block>
+
+<block name="header">
+<!-- banner start -->
+<div class="banner text-center">
+<think:link name="link" group="">
+<if condition=" !empty($link['img']) && $link['group']==$position[0]['name'].'_banner'">
+	<div class="box hba" style="background-image:url(__ROOT__{$link.img})"> </div>
+</if>
+</think:link>
+</div>
+<!-- banner end --> 
+</block>
+
+<block name="body">
+
+<!-- crumbs start -->
+<div class="crumbs">
+  <div class="container">
+    <div class="btn-group pull-right hidden-xs">
+      <button type="button" class="btn btn-menu btn-default dropdown-toggle" data-toggle="dropdown">更多菜单 Menu <span class="caret"></span></button>
+      <ul class="dropdown-menu" role="menu">
+	      <php>	$menu = get_category_son($category['id']); if( empty($menu) )$menu = get_category_son(0); </php>
+	      <volist name="menu" id="vo">
+	      <li><a href="{:U('Category/index?category='.$vo['name'])}">{$vo.title}</a></li>
+	      </volist>
+      </ul>
+    </div>
+    <ol class="breadcrumb">
+    	<li>
+    		<a href="__ROOT__/">首页</a>
+    		<volist name="position" id="vo">
+    		 &gt; <a href="{:U('Category/index?category='.$vo['name'])}">{$vo.title}</a>
+    		</volist>
+    	</li>
+    </ol>
+  </div>
+</div>
+<!-- crumbs end --> 
+<!-- content start -->
+<div class="neirong">
+	<div class="container">
+
+	    <div class="biaoti-sousuo row">
+	      <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+	        <h3 class="ny-bt">{$category.title|default=''}</h3>
+	      </div>
+	      <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+	        <form method="post"  class="search-form" action="{:U('Article/search')}" name="formsearch">
+	          <input type="hidden" name="kwtype" value="0" />
+	          <ul class="list-unstyled">
+	            <li>
+	              <input type="text" name="q" class="key" placeholder="输入关键词 Keyword" />
+	              <input type="submit" class="s-button" value="搜索" />
+	            </li>
+	          </ul>
+	        </form>
+	      </div>
+	    </div>
+	    <div class="case-fl">
+	      <p>
+	      	<strong>行业分类：</strong>
+	      	<volist name="menu" id="vo">
+		      <a href="{:U('Category/index?category='.$vo['name'])}">{$vo.title}</a> / 
+		    </volist>
+	      </p>
+	    </div>
+	    <div class="tj-case row"> </div>
+	    <div class="case">
+	      <section class="text-center">
+	        <div class="row">
+	        <volist name="list" id="data">
+	          <figure class="col-xs-12 col-sm-6 col-md-4 col-lg-4"><a href="{:U('Article/index?id='.$data['id'])}" title="{$data.title}" class="pic-link"><span class="case-hover"><span class="hover-link"></span></span><img src="{$data.cover_id|get_cover='path'}"  class="ylw-img-responsive3" alt="{$data.title}" /></a>
+	            <h3><a href="{:U('Article/index?id='.$data['id'])}" title="{$data.title}">{$data.title}</a><br />
+	              <small>关注：{$data.view} / 分类：<a href='{:U('Category/index?category='.get_category($data['category_id'],'name'))}'>{$data.category_id|get_category='title'}</a></small></h3>
+	          </figure>
+	        </volist>
+	        </div>
+	      </section>
+	    </div>
+
+	    <div class="fanye text-center">
+	      <ul class="pagination pagination-lg">
+	        <article:page cate="$category_ids" listrow="$category['list_row']" class="\Common\Lib\Page\Page" />
+	      </ul>
+	    </div>
+
+ 	</div>
+</div>
+<!-- content end -->
+
+</block>

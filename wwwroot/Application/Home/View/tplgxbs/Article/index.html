@@ -1,0 +1,124 @@
+{// 封面栏目默认模版 } 
+<extend name="Base/common"/>
+
+<block name="php"></block>
+
+<block name="header">
+<!-- banner start -->
+<div class="banner text-center">
+<think:link name="link" group="">
+<if condition=" !empty($link['img']) && $link['group']==$position[0]['name'].'_banner'">
+	<div class="box hba" style="background-image:url(__ROOT__{$link.img})"> </div>
+</if>
+</think:link>
+</div>
+<!-- banner end --> 
+</block>
+
+<block name="body">
+
+<!-- crumbs start -->
+<div class="crumbs">
+  <div class="container">
+    <div class="btn-group pull-right hidden-xs">
+      <button type="button" class="btn btn-menu btn-default dropdown-toggle" data-toggle="dropdown">更多菜单 Menu <span class="caret"></span></button>
+      <ul class="dropdown-menu" role="menu">
+	      <php>	$menu = get_category_son($category['id']); if( empty($menu) )$menu = get_category_son(0); </php>
+	      <volist name="menu" id="vo">
+	      <li><a href="{:U('Category/index?category='.$vo['name'])}">{$vo.title}</a></li>
+	      </volist>
+      </ul>
+    </div>
+    <ol class="breadcrumb">
+    	<li>
+    		<a href="__ROOT__/">首页</a>
+    		<volist name="position" id="vo">
+    		 &gt; <a href="{:U('Category/index?category='.$vo['name'])}">{$vo.title}</a>
+    		</volist>
+    		 &gt; <a href="#">详情</a>
+    	</li>
+    </ol>
+  </div>
+</div>
+<!-- crumbs end --> 
+<!-- content start -->
+<div class="neirong">
+  <article class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+        <article class="ny-shuoming text-center">
+          <h2>{$info.title|default=''}</h2>
+          <p>日期：{$info.create_time|date='Y-m-d H:i',###} / 人气：{$info.view} / 来源：{$info.source|default='亮星科技'} </p>
+        </article>
+        <article class="info">
+          <div class="bd"> {$info.content|default=''} </div>
+          <p align="center" class="pageLink"></p>
+          <p class="text-right">作者：{$info.uid|get_username}</p>
+        </article>
+        <hr class="m-sx-40" />
+        <div class="text-center">
+          <!--上一篇-->
+          <article:prev name="prev" info="info">
+          <a class="btn btn-success mb-none m-x-20" href="{:U('?id='.$prev['id'])}">上一篇：←</a> 
+          </article:prev>
+          <!--下一篇-->
+          <article:next name="next" info="info">
+          <a class="btn btn-success mb-none m-x-20" href="{:U('?id='.$next['id'])}">下一篇：→</a>  
+          </article:next>
+          </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        <div class="ny-right">
+          <form method="post"  class="search-form" action="{:U('Article/search')}" name="formsearch">
+            <input type="hidden" name="kwtype" value="0" />
+            <ul class="list-unstyled">
+              <li>
+                <input type="text" name="q" class="key" placeholder="输入关键词 Keyword" />
+                <input type="submit" class="s-button" value="搜索" />
+              </li>
+            </ul>
+          </form>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12">
+              <h4 class="ny-h4">推荐内容 <small>Recommended</small></h4>
+              <ul class="list-unstyled clearfix">
+              <Article:position name="data" pos="2" category="$category['id']">
+                <li><a href="{:U('Article/index?id='.$data['id'])}" title="{$data.title}">{$data.title}</a><small class="pull-right">{$data.create_time|date='m-d',###}</small>
+              </Article:position>
+              </ul>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12">
+              <h4 class="ny-h4">相关内容 <small>Related</small></h4>
+              <ul class="list-unstyled clearfix">
+              <Article:position name="data" pos="1" category="$category['id']">
+                <li><a href="{:U('Article/index?id='.$data['id'])}" title="{$data.title}">{$data.title}</a><small class="pull-right">{$data.create_time|date='m-d',###}</small>
+              </Article:position>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+<!-- content end -->
+<!-- kj-link start -->
+<div class="kj-link text-center">
+  <article class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <h3>我们的服务 Our Services</h3>
+        <p>我们可以为您提供的服务及我们对服务的态度，服务流程、服务优势、我们眼中的办公环境是怎样的。How are the services that we could provide to you, our attitude toward service, our service process, service advantages and the office environment in our eyes</p>
+        <p><a href="{:U('Category/index?category=fuwuxiangmu')}" >立即前往 Now Go &rarr;</a></p>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <h3>我们的成功案例 Our Successful Cases</h3>
+        <p>我们为您精心挑选的经典案例，去感受不一样的办公环境体验，服务于世界500强的企业为您服务。You can go to review our classic cases that we have picked for you so as to experience different office environments. The enterprise that has serviced world Top 500 enterprises will serve you as well.</p>
+        <p><a href="{:U('Category/index?category=chenggonganli')}" >立即前往 Now Go &rarr;</a></p>
+      </div>
+    </div>
+  </article>
+</div>
+<!-- kj-contact start --> 
+
+</block>

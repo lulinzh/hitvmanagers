@@ -1,0 +1,2 @@
+<?php die('forbidden'); ?>
+{"appid":"101293606","appkey":"58e6472aaf87f1385a29247b0d3937e7","callback":"http://www.daliyao.com/qqcallback.php","scope":"get_user_info","errorReport":true,"storageType":"file","host":"localhost","user":"root","password":"root","database":"test"}

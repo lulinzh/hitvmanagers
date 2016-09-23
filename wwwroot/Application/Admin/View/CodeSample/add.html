@@ -1,0 +1,99 @@
+<extend name="Public/base"/>
+
+<block name="hread_script">
+	<script type="text/javascript" language="javascript" src="__PUBLIC__/static/My97DatePicker/WdatePicker.js"></script>
+</block>
+
+<block name="body">
+	<div class="main-title">
+		<h2>
+			{$info['id']?'编辑':'新增'}代码示例
+		</h2>
+	</div>
+	<form action="{:U()}" method="post" class="form-horizontal">
+		<input type="hidden" name="pid" value="{$pid}">
+		<div class="form-item">
+			<label class="item-label">编码<span class="check-tips">(唯一编码代码)</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="code" value="{$info.code|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">标题<span class="check-tips">(标题建议不要太短或者太长)</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="title" value="{$info.title|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">手机号<span class="check-tips">(请填写您的手机号码)</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="phone" value="{$info.phone|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">电子邮箱<span class="check-tips">(请填写您的电子邮箱地址)</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="email" value="{$info.email|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">排序<span class="check-tips">(整数：按排列序号从小到大排列)</span></label>
+			<div class="controls">
+				<input type="text" class="text input-small" name="sort" value="{$info.sort|default='0'}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">内容<span class="check-tips">(可以编辑富文本哦)</span></label>
+			<div class="controls">
+				<label class="textarea">
+					<textarea name="content">{$info.content|default=''}</textarea>
+					{:hook('adminArticleEdit', array('name'=>'content','value'=>$info['content']))}
+				</label>
+			</div>
+		</div>		
+		<div class="form-item">
+			<label class="item-label">来源<span class="check-tips">(这是一个下拉框)</span></label>
+			<div class="controls">
+				<select name="from">
+					<volist name=":get_enum_array('ENUM_CODE_SAMPLE_FROM')" id="vo">
+					<option value="{$key}" <eq name="info.from" value="$key">selected</eq>>{$vo}</option>
+					</volist>
+				</select>
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">特长<span class="check-tips">(这是一个多选框)</span></label>
+			<div class="controls">
+					<volist name=":get_enum_array('ENUM_CODE_SAMPLE_SPECIALTY')" id="vo">            	
+					<label class="checkbox"><input type="checkbox" name="specialty[]" value="{$key}" <if condition="$info['specialty'] !='' && in_array($key, explode(',', $info['specialty']))">checked="checked"</if>>{$vo}</label>					
+					</volist>
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">性别<span class="check-tips">(这是一个单选框)</span></label>
+			<div class="controls">
+					<volist name=":get_enum_array('ENUM_CODE_SAMPLE_SEX')" id="vo">            	
+					<label class="checkbox"><input type="radio" name="sex" value="{$key}" <eq name="info.sex" value="$key">checked="checked"</eq>>{$vo}</label>					
+					</volist>
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">测试时间<span class="check-tips">(说明：测试时间)</span></label>
+			<div class="controls">
+				<input type="text" class="text input-mid" name="test_time" value="{$info.test_time|default=time()|time_format}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+			</div>
+		</div>
+		
+		<div class="form-item">
+			<input type="hidden" name="id" value="{$info.id|default=''}">
+			<button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+			<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+		</div>
+	</form>
+</block>
+<block name="script">
+<script type="text/javascript" charset="utf-8">
+	//高亮
+	highlight_subnav('{:U('index')}');
+</script>
+</block>

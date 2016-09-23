@@ -1,0 +1,10 @@
+RewriteEngine On
+
+#安全：屏蔽代码目录
+RewriteRule ^Application(.*)$ Home/Empty/ [L]
+RewriteRule ^BrightStar(.*)$ Home/Empty/ [L]
+
+#thinkphp3.2
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]

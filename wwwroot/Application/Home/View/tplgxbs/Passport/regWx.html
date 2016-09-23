@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xn="http:///www.renren.com/2009/xnml">
+<head>
+	<title>{:C('WEB_SITE_TITLE')} - 微信注册</title>
+	<meta http-equiv="Pragma" contect="no-cache" />
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link rel="stylesheet" href="__TPLROOT__/skin/css/passport.css?t={$Think.const.BRIGHTSTARTHINK_VERSION}" type="text/css" />
+	<script type="text/javascript" language="javascript" src="__PUBLIC__/static/jquery-1.8.3.min.js"></script>
+	<script language="javascript" src="__TPLROOT__/skin/js/passport.js?t={$Think.const.BRIGHTSTARTHINK_VERSION}"></script>
+	<script type="text/javascript">
+	try {	document.domain = '{$_SERVER['HTTP_HOST']}'; 	}catch(e){ }
+		
+		document.onkeydown = function() {
+			if (window.event && window.event.keyCode == 13) {
+				Passport.regWx();
+			}
+		}
+		$(function(){
+			$("#reg_nickname").focus();
+			Passport.init();
+		});
+	</script>
+</head>
+<body>
+	<div class="joymodlogin">
+<!-- 登录 -->	
+		<div id="denglu" style="display:<php> echo ($_GET['act']==0) ? 'block' : 'none';</php>;">
+			<div class="login-area">
+				<h3>您的微信号尚未注册或绑定本站帐号</h3>
+				<div class="login-item">
+							帐号：<input value="weixin{$_GET['scene']}" type="text" class="login-input" id="reg_userName" autocomplete="off" placeholder="用户名" onblur="Passport.checkUserName('reg_userName')" />
+							<span id="reg_userNameTip" class=""></span>
+				</div>
+				<div class="login-item">
+							密码：<input value="meiyoumimadefaultpwd" type="password" class="login-pwd" id="reg_password" placeholder="密码" onblur="Passport.checkPassword('reg_password')" />
+							<span id="reg_passwordTip" class=""></span>
+				</div>
+				<div class="login-item">
+							昵称：<input value="{$wxuser['nickname']}" type="text" class="login-pwd" id="reg_nickname" placeholder="昵称" onblur="Passport.checkNotEmpty('reg_nickname','昵称')" />
+							<span id="reg_nicknameTip" class=""></span>
+				</div>
+							<input type="hidden" id="reg_scene" value="{$_GET['scene']}" />
+							<input type="hidden" id="reg_ticket" value="{$_GET['ticket']}" />
+							<input type="hidden" id="reg_openid" value="{$_GET['openid']}" />				
+						<p>
+							<button class="login-btn" type="submit" id="reg_btn" onclick="Passport.regWx();" style="margin-left:36px;">注册新帐号</button>
+						</p>
+						<p style="margin:3px;color:#ff0000" id="reg_info"></p>
+			</div>
+			<div class="no-account">
+				<p>微信注册说明：</p>
+				<p>&nbsp;&nbsp;您可以自定义用户名和密码，如果您只需要用微信登录，无需记住用户名和密码，请直接点击【注册新帐号】。</p>
+				<br/><br/>
+				<p>已有非微信注册账号？</p>
+				<p><a class="regist-ntes btn" href="/index.php/Home/Passport"><em class="icon-ntes login"></em>登录已有账号</a></p>
+				<p>登录后在安全中心绑定微信</p>
+
+			</div>
+		</div>
+	</div>
+	</body>
+
+</html>

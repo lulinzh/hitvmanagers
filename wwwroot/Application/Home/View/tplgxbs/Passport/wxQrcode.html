@@ -1,0 +1,94 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xn="http:///www.renren.com/2009/xnml">
+<head>
+	<title>{:C('WEB_SITE_TITLE')} - 微信登录</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="__TPLROOT__/skin/css/passport.css?t={$Think.const.BRIGHTSTARTHINK_VERSION}" type="text/css" />
+	<!-- <link rel="stylesheet" href="__PUBLIC__/tpldefault/css/common.css?t={:C('RELEASE_VERSION')}" type="text/css" /> -->
+	<script type="text/javascript" language="javascript" src="__PUBLIC__/static/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" language="javascript">
+try {	document.domain = '{$_SERVER['HTTP_HOST']}'; 	}catch(e){ }
+//微信二维码
+var WxScan = {
+	_ticket : '',
+	_msg : '',
+	_scene : '',
+	_scantimes : 120,
+	_interval : null,
+	beginscan : function(scene, ticket, msg){
+		WxScan._scene = scene;
+		WxScan._ticket = ticket;
+		WxScan._msg = msg;
+		if(WxScan._scene.length > 0){
+			WxScan._interval=setInterval("WxScan.checkqrcode()",2000);
+		}
+	},
+	checkqrcode : function(){
+		if(WxScan._scantimes <= 1){
+			clearInterval(WxScan._interval);
+			if(parent.UAC != null && "undefined" != typeof(parent.UAC) ){
+				parent.UAC.closeUAC();
+			}
+			return;
+		}
+	    $.ajax({
+	        url:"/index.php/Home/Passport/dologinByWx/t/"+Math.random(),
+	        data:{scene:WxScan._scene, ticket:WxScan._ticket, msg:WxScan._msg},
+	        type:'post',
+	        dataType:'json',
+	        success: function(data){
+	        	if(data.code==0){
+	        		clearInterval(WxScan._interval);
+		        	$("#msg").html(data.info+" (正在刷新网页)");
+		        	parent.location.reload();
+	        	}else if(data.code==2){
+	        		if(parent.UAC != null && "undefined" != typeof(parent.UAC) ){
+		        		var openurl="/index.php/Home/Passport/regWx/scene/"+WxScan._scene+"/ticket/"+WxScan._ticket+"/openid/"+data.info;
+		        		parent.UAC.openUAC(0, null, openurl);
+	        		}
+	        	}else{
+		        	$("#msg").html(data.info+"("+WxScan._scantimes+")");
+	        	}
+	        },
+	        error: function(){
+	        	$("#msg").html("网络异常，请重新操作！");
+	        }
+	    });
+	    WxScan._scantimes--;
+	}		
+}
+
+$(document).ready(function(){
+	WxScan.beginscan("{$scene}", "{$ticket}", "{$msg}");
+});
+
+</script>
+<style>
+div{
+	font-size:12px;
+	text-align:center;
+	font-weight: bold;
+}
+.qrcode{
+	margin-top:6px;
+}
+.qrcode img{
+	width:300px;
+	height:300px;
+}
+</style>
+</head>
+<body>
+	<div class="qrcode">
+<if condition="empty($ticket)">
+		<img src="__TPLROOT__/skin/images/qrcode.jpg" />
+<else />
+		<img src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={:urlencode($ticket)}" />
+</if>
+	</div>
+	<div>
+		<span id="msg">{$msg}</span>
+	</div>
+</body>
+</html>

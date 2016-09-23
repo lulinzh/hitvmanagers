@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xn="http:///www.renren.com/2009/xnml">
+<head>
+	<title>{$siteconfig.sitename} 手机注册</title>
+	<meta http-equiv="Pragma" contect="no-cache" />
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link rel="stylesheet" href="__TPLROOT__/skin/css/passport.css?t={$Think.const.BRIGHTSTARTHINK_VERSION}" type="text/css" />
+	<script type="text/javascript" language="javascript" src="__PUBLIC__/static/jquery-1.8.3.min.js"></script>
+	<script language="javascript" src="__TPLROOT__/skin/js/passport.js?t={$Think.const.BRIGHTSTARTHINK_VERSION}"></script>
+	<script type="text/javascript">
+		try {	document.domain = '{$_SERVER['HTTP_HOST']}'; 	}catch(e){ }
+		
+		document.onkeydown = function() {
+			if (window.event && window.event.keyCode == 13) {
+				Passport.regPhone();
+			}
+		}
+		$(function(){
+			$("#reg_phone").focus();
+			$("#reg_btn").css("color", "#ccc");
+			Passport.chgCheckCode("reg_imgCode");
+			Passport.init();
+		});
+	</script>
+</head>
+<body>
+	<div class="joymodlogin">
+<!-- 登录 -->	
+		<div id="denglu" style="display:<php> echo ($_GET['act']==0) ? 'block' : 'none';</php>;">
+			<div class="login-area">
+				<h3>手机号码注册</h3>
+				<div class="login-item">
+							<input type="text" class="login-input" id="reg_phone" autocomplete="off" placeholder="手机号码" onblur="Passport.checkPhone('reg_phone')" />
+							<span id="reg_phoneTip" class="onShow">1 输入手机号码</span>
+				</div>
+				<div class="login-item">
+							<input class="login-input" placeholder="图形验证码" style="width:93px" type="text" id="reg_validateCode" maxlength="4" onblur="Passport.checkValidateCode('reg_validateCode');"/>
+							<img id="reg_imgCode" class="imgcheckcode" src="" onclick="Passport.chgCheckCode('reg_imgCode')" title="点击换一换" />
+							<!-- <span onclick="Passport.chgCheckCode('reg_imgCode')" title="看不清验证码？点击换一换！" style="cursor: pointer;">换一换</span> -->
+							<span id="reg_validateCodeTip" class="onShow">2 输入图形验证码</span>
+				</div>
+				<div class="login-item">
+							<input type="text" class="login-pwd" id="reg_phoneCode" placeholder="手机验证码" style="width:93px" maxlength="6" onblur="Passport.checkPhoneCode('reg_phoneCode')" />
+							<button class="btn" type="submit" onclick="Passport.sendPhoneCode(this);" style="width:102px;">发送验证码</button>
+							<span id="reg_phoneCodeTip" class="onShow">3 发送短信查收后输入</span>
+				</div>
+				<div class="login-item">
+							<input type="password" class="login-pwd" id="reg_password" placeholder="密码" onblur="Passport.checkPassword('reg_password')" />
+							<span id="reg_passwordTip" class="onShow">4 设置帐号密码</span>
+				</div>
+
+						
+						<p>
+							<button class="login-btn" type="submit" id="reg_btn" onclick="Passport.regPhone();">注册</button>
+						</p>
+						<p style="margin:3px;color:#ff0000" id="reg_info"></p>
+			</div>
+			<div class="no-account">
+				<p>其它注册方式：</p>
+				<p><a class="regist-ntes btn" href="/index.php/Home/Passport/index/act/1"><em class="icon-ntes email"></em>电子邮箱注册</a></p>
+				<p><a class="regist-ntes btn" href="javascript:parent.UAC.openWxQrcode()"><em class="icon-ntes weixin"></em>微信帐号注册</a></p>
+				<br/>
+				<p>已经有账号？</p>
+				<p><a class="regist-ntes btn" href="/index.php/Home/Passport"><em class="icon-ntes login"></em>登录已有账号</a></p>
+				<p><a class="regist-ntes btn" href="javascript:parent.UAC.openWxQrcode()"><em class="icon-ntes weixin"></em>微信帐号登录</a></p>
+
+			</div>
+		</div>
+	</div>
+	</body>
+
+</html>

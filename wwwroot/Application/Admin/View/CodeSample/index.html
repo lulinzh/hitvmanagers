@@ -1,0 +1,70 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>代码示例管理</h2>
+	</div>
+
+	<div class="cf">
+		<a class="btn" href="{:U('add')}">新 增</a>
+		<button class="btn ajax-post confirm" target-form="ids" url="{:U('del')}">删 除</button>
+	</div>
+
+	<div class="data-table table-striped">
+		<table>
+			<thead>
+				<tr>
+					<th class="row-selected"><input class="checkbox check-all" type="checkbox"></th>
+					<th>标识</th>
+					<th>编码</th>
+					<th>标题</th>
+					<th>手机号</th>
+					<th>电子邮箱</th>
+					<th>排序</th>
+					<th>来源</th>
+					<th>特长</th>
+					<th>性别</th>
+					<th>测试时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<notempty name="list">
+				<volist name="list" id="vo">
+				<tr>
+					<td><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td>
+					<td>{$vo.id}</td>
+					<td>{$vo.code}</td>
+					<td>{$vo.title}</td>
+					<td>{$vo.phone}</td>
+					<td>{$vo.email}</td>
+					<td>{$vo.sort}</td>
+					<td>{:get_enum_value('ENUM_CODE_SAMPLE_FROM', $vo['from'])}</td>
+					<td>{:get_enum_value('ENUM_CODE_SAMPLE_SPECIALTY', explode(',',$vo['specialty']),',')}</td>
+					<td>{:get_enum_value('ENUM_CODE_SAMPLE_SEX', $vo['sex'])}</td>
+					<td>{$vo.test_time|time_format}</td>
+					<td>
+						<a title="编辑" href="{:U('edit?id='.$vo['id'].'&pid='.$pid)}">编辑</a>
+						<a class="confirm ajax-get" title="删除" href="{:U('del?ids='.$vo['id'])}">删除</a>
+					</td>
+				</tr>
+				</volist>
+				<else/>
+					<td colspan="12" class="text-center"> 亲^_^! 暂时还没有记录! </td>
+				</notempty>
+			</tbody>
+		</table>
+		<!-- 分页 -->
+		<div class="page">
+			{$_page}
+		</div>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+    $(function() {
+
+    });
+</script>
+</block>

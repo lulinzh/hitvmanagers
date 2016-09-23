@@ -1,0 +1,35 @@
+<extend name="Base/user" />
+
+
+<block name="main">
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="javascript:;"><i class="glyphicon glyphicon-user"></i> 修改头像</a></li>
+		<li role="presentation"><a href="{:U('User/profile')}"><i class="glyphicon glyphicon-edit"></i> 修改资料</a></li>
+		<li role="presentation"><a href="{:U('User/actionlog')}"><i class="glyphicon glyphicon-eye-open"></i> 操作日志</a></li>
+	</ul>
+      
+    <br/>
+<php>$uc_uid = is_login();</php>
+	<div class="alert alert-info" role="alert">
+		<strong>当前我的头像</strong> &nbsp;&nbsp;&nbsp;&nbsp;如果您还没有设置自己的头像，系统会显示为默认头像，您需要上传一张新照片来作为自己的个人头像。
+	</div>
+	<img src="{$Think.const.UC_API}/avatar.php?uid={$uc_uid}&size=big">&nbsp;&nbsp;
+	<img src="{$Think.const.UC_API}/avatar.php?uid={$uc_uid}&size=middle">&nbsp;&nbsp;
+	<img src="{$Think.const.UC_API}/avatar.php?uid={$uc_uid}&size=small">
+
+	<br /><br />
+	<div class="alert alert-info" role="alert">
+		<strong>设置我的新头像</strong> &nbsp;&nbsp;&nbsp;&nbsp;请您选择一个新照片进行上传编辑，也可以使用您电脑的摄像头拍照上传哦。
+	</div>
+	{:uc_avatar($uc_uid)}
+	<br /><br />
+	<div class="alert alert-warning" role="alert">
+		亲^_^! 头像保存后，您可能需要<a href="javascript:location.reload()">刷新一下本页面(按F5键)</a>，才能查看最新的头像效果。
+	</div>
+	
+<script type="text/javascript">
+function updateavatar() {
+window.location.reload();
+}
+</script>
+</block>

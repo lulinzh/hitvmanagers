@@ -1,0 +1,108 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>测试：二维矩阵焦点</title>
+<script type="text/javascript" language="javascript" src="/Public/static/jquery-1.8.3.min.js"></script>
+<script src="jquery.keyfocus.js"></script>
+<script>
+	
+$(document).ready(function(){
+	
+	$.keyfocus({
+		objArray: [$('#line1 a'), $('#line2 a'), $('#line3 a'), $('#line4 a'), $('#line5 a'), $('#line6 a'), $('#line7 a'), $('#line8 a')],		//矩阵
+		curFocus: {x:2,y:1},		//默认焦点索引
+		callBackUp:function(){alert('up');},
+		callBackRight:function(){alert('right');},
+		callBackDown:function(){alert('down');},
+		callBackLeft:function(){alert('left');},
+		isLateral:true					//横向移动
+	});
+
+	//alert('成功');
+});
+
+</script>
+
+<style>
+#container{
+	display: block;
+	position: relative;
+	background-color: #0ee;
+	width: 1280px;
+	height: 720px;
+	margin:auto;
+}
+a:focus{
+	background:#f00;
+}
+</style>
+</head>
+<body>
+ 
+<div id="container">
+	<p id="line1">
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+	</p>
+	<p id="line2">
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+	</p>
+	<p id="line3">
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+	</p>
+	<p id="line4">
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<span>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</span>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+	</p>
+	<p id="line5">
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+	</p>
+	<p id="line6">
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+	</p>
+	<p id="line7">
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+	</p>
+	<p id="line8">
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+			<a href="http://www.baidu.com" target="_blank">焦点哈哈哈</a>
+	</p>
+</div>
+ 
+</body>
+</html>

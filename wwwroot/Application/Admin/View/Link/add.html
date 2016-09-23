@@ -1,0 +1,71 @@
+<extend name="Public/base"/>
+
+
+<block name="body">
+	<div class="main-title">
+		<h2>
+			{$info['id']?'编辑':'新增'}网站连接
+		</h2>
+	</div>
+	<form action="{:U()}" method="post" class="form-horizontal">
+		<input type="hidden" name="pid" value="{$pid}">
+		<div class="form-item">
+			<label class="item-label">分组<span class="check-tips">(即网站上出现的位置，如[friend_link][home_banner]，和可以用汉字)</span></label>
+			<div class="controls">
+				<label class="textarea input-large">
+					<textarea name="group">{$info.group|default=''}</textarea>
+				</label>
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">标题<span class="check-tips">(连接的标题,如果是图片连接，会出现在图片的alt属性)</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="title" value="{$info.title|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">图片<span class="check-tips">(如果是图片连接，请填写此值)</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="img" value="{$info.img|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">地址<span class="check-tips">(连接地址)</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="url" value="{$info.url|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">打开方式<span class="check-tips">(这是一个单选框)</span></label>
+			<div class="controls">
+					<volist name=":get_enum_array('ENUM_LINK_TARGET')" id="vo">            	
+					<label class="checkbox"><input type="radio" name="target" value="{$key}" <eq name="info.target" value="$key">checked="checked"</eq>>{$vo}</label>					
+					</volist>
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">排序<span class="check-tips">(整数：按排列序号从小到大排列)</span></label>
+			<div class="controls">
+				<input type="text" class="text input-small" name="sort" value="{$info.sort|default='0'}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">描述<span class="check-tips">(备注信息、或者说明内容)</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="desc" value="{$info.desc|default=''}">
+			</div>
+		</div>
+		
+		<div class="form-item">
+			<input type="hidden" name="id" value="{$info.id|default=''}">
+			<button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+			<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+		</div>
+	</form>
+</block>
+<block name="script">
+<script type="text/javascript" charset="utf-8">
+	//高亮
+	highlight_subnav('{:U('index')}');
+</script>
+</block>

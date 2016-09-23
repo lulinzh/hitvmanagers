@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xn="http:///www.renren.com/2009/xnml">
+<head>
+	<title>{:C('WEB_SITE_TITLE')} - QQ登录</title>
+	<meta http-equiv="Pragma" contect="no-cache" />
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link rel="stylesheet" href="__TPLROOT__/skin/css/passport.css?t={$Think.const.BRIGHTSTARTHINK_VERSION}" type="text/css" />
+	<script type="text/javascript" language="javascript" src="__PUBLIC__/static/jquery-1.8.3.min.js"></script>
+	<script language="javascript" src="__TPLROOT__/skin/js/passport.js?t={$Think.const.BRIGHTSTARTHINK_VERSION}"></script>
+	<script type="text/javascript">
+		try {	document.domain = '{$_SERVER['HTTP_HOST']}'; 	}catch(e){ }
+		
+		document.onkeydown = function() {
+			if (window.event && window.event.keyCode == 13) {
+				Passport.regWx();
+			}
+		}
+		$(function(){
+			$("#reg_nickname").focus();
+			Passport.init();
+		});
+	</script>
+</head>
+<body>
+<if condition="!empty($msg)">
+	<div class="joymodlogin">
+		<div id="denglu"">
+			<h3 class="msg"> {$msg} </h3>
+			<script type="text/javascript"> {$script} </script>
+		</div>
+	</div>
+<else/>
+	<div class="joymodlogin">
+<!-- 登录 -->	
+		<div id="denglu"">
+			<div class="login-area" style="width:480px;">
+				<h3>您的QQ号尚未注册或绑定本站帐号</h3>
+				<div class="login-item">
+							帐号：<input value="{$userName}" type="text" class="login-input" id="reg_userName" autocomplete="off" placeholder="用户名" onfocus="AutoReg.stopTimer()" onblur="Passport.checkUserName('reg_userName')" />
+							<span id="reg_userNameTip" class="onShow">此帐号由系统随机生成</span>
+				</div>
+				<div class="login-item">
+							密码：<input value="meiyoumimadefaultpwd" type="password" class="login-pwd" id="reg_password" placeholder="密码" onfocus="AutoReg.stopTimer()" onblur="Passport.checkPassword('reg_password')" />
+							<span id="reg_passwordTip" class=""></span>
+				</div>
+				<div class="login-item">
+							昵称：<input value="{$qquser['nickname']}" type="text" class="login-pwd" id="reg_nickname" placeholder="昵称" onfocus="AutoReg.stopTimer()" onblur="Passport.checkNotEmpty('reg_nickname','昵称')" />
+							<span id="reg_nicknameTip" class=""></span>
+				</div>
+							<input type="hidden" id="reg_token" value="{$qqtoken}" />				
+							<input type="hidden" id="reg_openid" value="{$qqopenid}" />				
+						<p>
+							<button class="login-btn" type="submit" id="reg_btn" onclick="Passport.regQQ();" style="margin-left:36px;">注册新帐号</button>
+						</p>
+						<p style="margin:3px;color:#ff0000" id="reg_info"></p>
+			</div>
+			<div class="no-account">
+				<p>QQ注册说明：</p>
+				<p>&nbsp;&nbsp;您可以自定义用户名和密码，如果您只需要用QQ登录，无需记住用户名和密码，请直接点击【注册新帐号】。</p>
+				<br/><br/>
+				<p>已有非QQ注册账号？</p>
+				<p><a class="regist-ntes btn" href="__ROOT__/index.php/Home/Passport"><em class="icon-ntes login"></em>登录已有账号</a></p>
+				<p>登录后在安全中心绑定QQ</p>
+
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">
+//自动注册定时器
+//微信二维码
+var AutoReg = {
+	_scantimes : 10,
+	_interval : null,
+	begin : function(){
+		AutoReg._interval=setInterval("AutoReg.autoRegTimer()",1000);
+	},
+	autoRegTimer : function(){
+		if(AutoReg._scantimes <= 1){
+			AutoReg.stopTimer();
+			Passport.regQQ();
+			return;
+		}
+		$('#reg_btn').html('自动注册('+AutoReg._scantimes+')');
+		AutoReg._scantimes--;
+	},
+	stopTimer : function(){
+		if(AutoReg._interval != null){
+			clearInterval(AutoReg._interval);
+			AutoReg._interval = null;
+		}
+		$('#reg_btn').html('注册新帐号');
+	}
+}
+
+$(document).ready(function(){
+	AutoReg.begin();
+});
+</script>
+</if>
+	</body>
+
+</html>

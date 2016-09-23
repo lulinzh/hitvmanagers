@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>微信分享测试</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport">
+</head>
+<body>
+    <input id="share_content" type="text" style="width:90%;font-size:2em;" /><br /><br />
+    <input type="button" id="share" value="分享朋友圈" onclick="share();" style="width:90%;font-size:2em;" /><br /><br />
+	<input type="button" id="send" value="发送给朋友" onclick="send();" style="width:90%;font-size:2em;" /><br /><br />
+
+    <?php
+        //微信分享
+        function httpGet($url) {
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_TIMEOUT, 500);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($curl, CURLOPT_URL, $url);
+
+            $res = curl_exec($curl);
+            curl_close($curl);
+
+            return $res;
+        }
+    
+        $url = (empty($_SERVER["REQUEST_SCHEME"])?'http':$_SERVER["REQUEST_SCHEME"]).'://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+        $res = json_decode(httpGet('http://'.$_SERVER[HTTP_HOST].'/Intf/wxshare.html?url='.urlencode($url)), true);
+        $appId = $res['appId'];
+        $noncestr = $res['nonceStr'];
+        $timestamp = $res['timestamp'];
+        $signature = $res['signature'];
+
+        $str_title = '分享标题'; //分享标题
+        $str_desc = '分享内容提要'; //分享内容提要
+        $str_link = 'http://www.lxgame.cn'; //分享链接
+        $str_ico = 'http://lxcms.lxgame.cn/lx_logo.jpg'; //分享LOGO，要求256*256，JPG格式
+    ?>
+
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+        wx.config({
+            debug: false,		// 如果不起作用，改为true调试
+            appId: '<?php echo $appId;?>',
+            timestamp: '<?php echo $timestamp;?>',
+            nonceStr: '<?php echo $noncestr; ?>',
+            signature: '<?php echo $signature;?>',
+            jsApiList: [
+                "chooseImage",
+                "scanQRCode",
+                "openLocation",
+                "getLocation",
+                "openProductSpecificView",
+                "translateVoice",
+                "startRecord",
+                "stopRecord",
+                "onMenuShareTimeline",
+                "onMenuShareQQ",
+                "onMenuShareWeibo",
+                "onMenuShareAppMessage",
+                "showOptionMenu"
+            ]
+        });
+
+        wx.ready(function () {
+            wx.onMenuShareTimeline({
+                title: '<?php echo $str_title;?>',
+                desc: '<?php echo $str_desc;?>',
+                link: '<?php echo $str_link;?>',
+                imgUrl: '<?php echo $str_ico;?>',
+                success: function (res) {
+                    //分享朋友圈成功回调
+                }
+            });
+			wx.onMenuShareAppMessage({
+                title: '<?php echo $str_title;?>',
+                desc: '<?php echo $str_desc;?>',
+                link: '<?php echo $str_link;?>',
+                imgUrl: '<?php echo $str_ico;?>',
+                success: function (res) {
+                    //发送朋友成功回调
+                }
+            });
+        });
+		
+		function share(){
+			wx.onMenuShareTimeline({
+                title: document.getElementById('share_content').value,
+                desc: document.getElementById('share_content').value,
+                link: '<?php echo $str_link;?>',
+                imgUrl: '<?php echo $str_ico;?>',
+                success: function (res) {
+                    //分享朋友圈成功回调
+                }
+            });
+			alert('分享朋友圈：'+document.getElementById('share_content').value);
+		}
+		
+		function send(){
+			wx.onMenuShareAppMessage({
+                title: document.getElementById('share_content').value,
+                desc: document.getElementById('share_content').value,
+                link: '<?php echo $str_link;?>',
+                imgUrl: '<?php echo $str_ico;?>',
+                success: function (res) {
+                    //发送朋友成功回调
+                }
+            });
+			alert('发送给朋友：'+document.getElementById('share_content').value);
+		}
+
+    </script>
+</body>
+</html>

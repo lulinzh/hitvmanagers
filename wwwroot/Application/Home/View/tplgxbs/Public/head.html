@@ -1,0 +1,35 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title><notempty name="category.title">{$category.title} - </notempty>{:C('WEB_SITE_TITLE')}</title>
+<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}" />
+<meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}" />
+<meta name="author" content="order by gxbrightstar.com" />
+<link href="__TPLROOT__/skin/css/bootstrap.min.css" rel="stylesheet">
+<link href="__TPLROOT__/skin/css/style.css" rel="stylesheet">
+<link href="__TPLROOT__/skin/css/shake.css" rel="stylesheet">
+<link rel="shortcut icon" href="__ROOT__/favicon.ico" />
+<!--[if lt IE 9]>
+<script src="__TPLROOT__/skin/js/html5shiv.min.js"></script>
+<script src="__TPLROOT__/skin/js/respond.min.js"></script>
+<link href="__TPLROOT__/skin/css/ie8.css" rel="stylesheet">
+<![endif]-->
+<!--[if lte IE 6]>
+<meta http-equiv="refresh" content="0;url=/no-ie6.html" />
+<![endif]-->
+<!--[if lte IE 7]>
+<meta http-equiv="refresh" content="0;url=/no-ie6.html" />
+<![endif]-->
+<block name="script">
+<script src="__TPLROOT__/skin/js/jquery.min.js"></script>
+<script type="text/javascript">
+try {	document.domain = '{$_SERVER['HTTP_HOST']}'; 	}catch(e){ }
+$(function(){
+	$(".banner").hide().show(200);
+	$(".crumbs").hide().show(500);
+});
+</script>
+</block>
+<block name="style"></block>
+<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
+{:hook('pageHeader')}

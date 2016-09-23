@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xn="http:///www.renren.com/2009/xnml">
+<head>
+	<title>{:C('WEB_SITE_TITLE')} - 登录</title>
+	<meta http-equiv="Pragma" contect="no-cache" />
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link rel="stylesheet" href="__TPLROOT__/skin/css/passport.css?t={$Think.const.BRIGHTSTARTHINK_VERSION}" type="text/css" />
+	<script type="text/javascript" language="javascript" src="__PUBLIC__/static/jquery-1.8.3.min.js"></script>
+	<script language="javascript" src="__TPLROOT__/skin/js/passport.js?t={$Think.const.BRIGHTSTARTHINK_VERSION}"></script>
+	<script type="text/javascript">
+		try {	document.domain = '{$_SERVER['HTTP_HOST']}'; 	}catch(e){ }
+		
+		function hide(n) {
+			if(n == "0"){
+				$("#zhuce").hide();
+				$("#denglu").show();
+				$("#login_userName").focus();
+			}else{
+				$("#denglu").hide();
+				$("#zhuce").show();
+				Passport.chgCheckCode("reg_imgCode");
+				$("#reg_email").focus();
+			}
+		}
+		
+		document.onkeydown = function() {
+			if (window.event && window.event.keyCode == 13) {
+				<php> echo ($_GET['act']==0) ? 'Passport.login();' : ';';</php>
+			}
+		}
+		
+		$(function(){
+			$("#<php> echo ($_GET['act']==0) ? 'login_userName' : 'reg_email';</php>").focus();
+			<php> echo ($_GET['act']==0) ? ';' : 'Passport.chgCheckCode("reg_imgCode");';</php>
+			Passport.init();
+		});
+	</script>
+</head>
+<body>
+	<div class="joymodlogin">
+<!-- 登录 -->	
+		<div id="denglu" style="display:<php> echo ($_GET['act']==0) ? 'block' : 'none';</php>;">
+			<div class="login-area">
+				<h3>帐号登录</h3>
+				<div class="login-item">
+							<input type="text" class="login-input" id="login_userName" autocomplete="off" placeholder="手机号/邮箱/会员帐号" onblur="Passport.checkUserName('login_userName')" />
+							<span id="login_userNameTip" class="">推荐用手机号登录</span>
+				</div>
+				<div class="login-item">
+							<input type="password" class="login-pwd" id="login_password" placeholder="密码" onblur="Passport.checkPassword('login_password')" />
+							<span id="login_passwordTip" class=""></span>
+				</div>
+				
+				<div id="item_logincode_none" style="height:25px;display:<php>if(C('LXSYS_LOGIN_NEED_VALIDATECODE')) echo 'none'; </php>;"></div>
+				<div id="item_logincode" class="login-item" style="display:<php>if(!C('LXSYS_LOGIN_NEED_VALIDATECODE')) echo 'none'; </php>;">
+							<input class="login-input" placeholder="图形验证码" style="width:93px" type="text" id="login_validateCode" maxlength="4" onblur="Passport.checkValidateCode('login_validateCode');"/>
+							<img id="login_imgCode" class="imgcheckcode" src="" onclick="Passport.chgCheckCode('login_imgCode')" title="点击换一换" />
+							<span onclick="Passport.chgCheckCode('login_imgCode')" title="看不清验证码？点击换一换！" style="cursor: pointer;">换一换</span>
+							<span id="login_validateCodeTip" class=""></span>
+				</div>
+						
+						<p class="login-check" style="clear:both">
+							<label class="fl"><input value="1" type="checkbox" id="login_autoLogin">下次自动登录</label>
+							<a class="forgot onTime" href="{:U('User/safe_resetPwdByPhone')}" target="_blank">忘记密码？</a>
+						</p>
+						<p>
+							<button class="login-btn" type="submit" id="login_btn" onclick="Passport.login();">登录</button>
+						</p>
+						<p style="margin:3px;color:#ff0000" id="login_info"></p>
+			</div>
+			<div class="no-account">
+				<p>已经有账号：</p>
+				<p><a class="regist-ntes btn" href="javascript:parent.UAC.openWxQrcode()"><em class="icon-ntes weixin"></em>微信帐号登录</a></p>
+				<!-- <p><a class="regist-ntes btn" href="javascript:parent.UAC.openQQ()"><em class="icon-ntes qq"></em>腾讯QQ登录</a></p> -->
+				<div style="height:8px;"></div>
+				<p>还没有账号？</p>
+				<p><a class="regist-ntes btn" href="{:U('regPhone')}"><em class="icon-ntes phone"></em>手机号码注册</a></p>
+				<p><a class="regist-ntes btn" href="javascript:parent.UAC.openWxQrcode()"><em class="icon-ntes weixin"></em>微信帐号注册</a></p>
+				<p><a class="regist-ntes btn" href="javascript:hide(1)"><em class="icon-ntes email"></em>电子邮箱注册</a></p>
+			</div>
+		</div>
+<!--注册-->
+		<div id="zhuce" style="display:<php> echo ($_GET['act']==1) ? 'block' : 'none';</php>;">
+			<div class="login-area">
+				<h3>电子邮箱注册</h3>
+				<div class="login-item">
+							<input type="text" class="login-input" id="reg_email" autocomplete="off" placeholder="邮箱" onblur="Passport.checkEmail('reg_email')" />
+							<span id="reg_emailTip" class="">确保邮箱可用</span>
+				</div>
+				<div class="login-item">
+							<input type="password" class="login-pwd" id="reg_password" placeholder="密码" onblur="Passport.checkPassword('reg_password')" />
+							<span id="reg_passwordTip" class=""></span>
+				</div>
+				<div class="login-item">
+							<input type="password" class="login-pwd" id="reg_password2" placeholder="重复密码" onblur="Passport.checkPassword('reg_password2', 'reg_password')" />
+							<span id="reg_password2Tip" class=""></span>
+				</div>
+				<div class="login-item">
+							<input class="login-input" placeholder="图形验证码" style="width:93px" type="text" id="reg_validateCode" maxlength="4" onblur="Passport.checkValidateCode('reg_validateCode');"/>
+							<img id="reg_imgCode" class="imgcheckcode" src="" onclick="Passport.chgCheckCode('reg_imgCode')" title="点击换一换" />
+							<span onclick="Passport.chgCheckCode('reg_imgCode')" title="看不清验证码？点击换一换！" style="cursor: pointer;">换一换</span>
+							<span id="reg_validateCodeTip" class=""></span>
+				</div>
+						
+						<p>
+							<button class="login-btn" type="submit" id="reg_btn" onclick="Passport.reg();">注册</button>
+						</p>
+						<p style="margin:3px;color:#ff0000" id="reg_info"></p>
+			</div>
+
+			<div class="no-account">
+				<p>其它注册方式：</p>
+				<p><a class="regist-ntes btn" href="{:U('regPhone')}"><em class="icon-ntes phone"></em>手机号码注册</a></p>
+				<p><a class="regist-ntes btn" href="javascript:parent.UAC.openWxQrcode()"><em class="icon-ntes weixin"></em>微信帐号注册</a></p>
+				<br/>
+				<p>已有账号？</p>
+				<p><a class="regist-ntes btn" href="javascript:hide(0)"><em class="icon-ntes login"></em>登录已有账号</a></p>
+				<p><a class="regist-ntes btn" href="javascript:parent.UAC.openWxQrcode()"><em class="icon-ntes weixin"></em>微信帐号登录</a></p>
+				</p>	 
+			</div>
+		</div>
+	</div>
+	</body>
+
+</html>

@@ -1,0 +1,36 @@
+/*  亮星内容管理框架-开发日志
+
+	2016/1/18 19:10:36 创建文档   后台/lxadmin.php 用户/密码： lxadmin/lxadmin
+	
+推荐使用淘宝模版：https://item.taobao.com/item.htm?spm=a230r.1.14.8.TyWvsx&id=521856149482&ns=1&abbucket=2#detail
+*/
+
+
+2016/1/18 19:10:45
+	把内核从ThinkPHP_3.2.3beta，改为 ThinkPHP_3.2.3 full版：  即换掉ThinkPHP目录，并且把\ThinkPHP\Library\OT\拷贝过来
+	去掉install模块，改为手工安装
+	修改thinkphp默认目录结构，把thinkphp目录下移一层。并增加 \BrightStarCore\Lib 目录
+
+2016/1/18 19:39:50
+	修改onethink一些菜单结构
+2016/1/27 17:20:10
+	增加My97DatePicker控件
+2016/1/29 14:45:04
+	开发完成代码生成器
+	新增一个表， 里面含有各种类型的字段
+
+2016/2/2 10:34:24
+	更新版本至：BrightStarThink V1.1.160202版
+	修改内容：
+			1、修改栏目，文章模型部分字段，增加网站连接管理功能。
+			2、前台模版套用“HTML5响应式通用模板”，此为模仿织梦模版。			
+			3、修改标签类型，使得标签功能更加完善，适合更多模版套用。
+			4、更优化了代码生成器
+2016/2/19 11:12:47
+	更新版本至：BrightStarThink 1.2.160219
+	废弃了onethink的用户中心，整合了康盛的UCenter，能完美对接discuz ecshop等常用工具。
+	增加了QQ登录，微信登录，用户注册登录
+	修改了登录cookie加密方式
+
+2016/3/9 20:50:55
+	`lx_config` name字段过短，建议改成200
